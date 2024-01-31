@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -66,4 +68,31 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Dagger hilt with navigation
+    implementation("com.google.dagger:hilt-android:2.44")
+    implementation("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    // Navigation compose
+    val navigationCompose = "2.7.5"
+    implementation("androidx.navigation:navigation-compose:$navigationCompose")
+
+    val retrofit = "2.9.0"
+    val moshi = "1.9.3"
+    val okhttp = "5.0.0-alpha.2"
+    implementation("com.squareup.retrofit2:retrofit:$retrofit")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit")
+    implementation("com.squareup.moshi:moshi-kotlin:$moshi")
+    implementation("com.squareup.retrofit2:converter-moshi:$okhttp")
+    implementation("com.squareup.okhttp3:okhttp:$okhttp")
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttp")
+
+    val kotlinxCoroutines = "1.7.3"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutines")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxCoroutines")
+}
+
+kapt {
+    correctErrorTypes = true
 }
