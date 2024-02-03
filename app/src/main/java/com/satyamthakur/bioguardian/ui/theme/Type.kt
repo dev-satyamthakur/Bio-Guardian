@@ -2,9 +2,19 @@ package com.satyamthakur.bioguardian.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.satyamthakur.bioguardian.R
+
+val Montserrat = FontFamily(
+    Font(R.font.montserrat_semibold, FontWeight.SemiBold)
+)
+
+val Roboto = FontFamily(
+    Font(R.font.roboto_regular, FontWeight.Normal)
+)
 
 // Set of Material typography styles to start with
 val Typography = Typography(

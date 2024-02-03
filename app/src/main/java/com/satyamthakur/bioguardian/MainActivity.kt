@@ -6,16 +6,26 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.satyamthakur.bioguardian.data.api.ApiService
 import com.satyamthakur.bioguardian.data.datasource.PostsDataSource
+import com.satyamthakur.bioguardian.data.entity.ResourceState
+import com.satyamthakur.bioguardian.ui.composables.HeroCard
 import com.satyamthakur.bioguardian.ui.theme.BioGuardianTheme
+import com.satyamthakur.bioguardian.ui.viewmodel.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -42,13 +52,39 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Box(
-                        contentAlignment = Alignment.Center
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp)
                     ) {
-                        Text("Hello, World", fontSize = 32.sp)
+                        HeroCard()
                     }
                 }
             }
         }
     }
 }
+//
+//@Composable
+//fun ShowPost(postViewModel: PostViewModel = hiltViewModel()) {
+//    val postRes by postViewModel.post.collectAsState()
+//
+//    Box(
+//        modifier = Modifier.fillMaxSize(),
+//        contentAlignment = Alignment.Center
+//    ) {
+//        when (postRes) {
+//            is ResourceState.Loading -> {
+//                Text(text = "Loading...", fontSize = 25.sp)
+//            }
+//            is ResourceState.Success -> {
+//                val response = (postRes as ResourceState.Success).data
+//                Text(text = response.body.toString(), fontSize = 25.sp)
+//            }
+//            is ResourceState.Error -> {
+//
+//            }
+//        }
+//    }
+//
+//}
