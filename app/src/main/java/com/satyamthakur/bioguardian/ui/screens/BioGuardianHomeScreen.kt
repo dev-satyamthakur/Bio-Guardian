@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,12 +20,14 @@ import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
 
 @Composable
 fun BioGuardianAppHomeScreen() {
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp)
-
+            .padding()
+            .verticalScroll(scrollState)
     ) {
+        Spacer(modifier = Modifier.height(10.dp))
         HeadingToolbar()
         Spacer(modifier = Modifier.height(20.dp))
         HeroCard()
@@ -31,6 +35,7 @@ fun BioGuardianAppHomeScreen() {
         ExploreMoreSection()
         Spacer(modifier = Modifier.height(20.dp))
         EndangeredNowSection()
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 

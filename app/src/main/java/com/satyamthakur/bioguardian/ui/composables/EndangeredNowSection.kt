@@ -1,5 +1,6 @@
 package com.satyamthakur.bioguardian.ui.composables
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -64,7 +65,8 @@ fun EndangeredAnimalItemCard(
         colors = CardDefaults.cardColors(
             containerColor = md_theme_light_tertiaryContainer
         ),
-        modifier = Modifier
+        modifier = Modifier,
+        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer)
     ) {
         Column(
             modifier = Modifier

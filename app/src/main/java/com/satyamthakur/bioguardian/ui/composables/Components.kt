@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -44,7 +45,8 @@ fun HeroCard() {
         modifier = Modifier.padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(
             containerColor = md_theme_light_tertiaryContainer
-        )
+        ),
+        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer)
     ) {
         Column(
             modifier = Modifier
@@ -69,7 +71,7 @@ fun HeroCard() {
                     contentDescription = null
                 )
                 Spacer(modifier = Modifier.weight(1f))
-                OutlinedButton(
+                Button(
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.White,
                     ),
