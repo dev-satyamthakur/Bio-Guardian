@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,8 +16,10 @@ import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -92,6 +95,59 @@ fun HeroCard() {
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ExploreMoreCards(title: String) {
+    OutlinedCard(
+        modifier = Modifier.size(170.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = md_theme_light_tertiaryContainer,
+        ),
+        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
+        onClick = { /*TODO*/ }) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = title,
+                fontFamily = Montserrat,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp,
+                lineHeight = 24.sp
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            OutlinedButton(
+                modifier = Modifier.align(Alignment.End),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White,
+                ),
+                border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
+                onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Filled.KeyboardArrowRight,
+                    contentDescription = null,
+                    modifier = Modifier.size(ButtonDefaults.IconSize),
+                    tint = md_theme_light_onTertiaryContainer
+                )
+                Text(
+                    text = "View",
+                    fontFamily = Montserrat,
+                    fontSize = 12.sp,
+                    color = md_theme_light_onTertiaryContainer
+                )
+            }
+        }
+    }
+}
+
+@Preview()
+@Composable
+fun PrevExplore() {
+    ExploreMoreCards("Nearby\nReserves")
 }
 
 @Preview()

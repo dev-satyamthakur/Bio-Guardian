@@ -24,6 +24,7 @@ import com.satyamthakur.bioguardian.data.api.ApiService
 import com.satyamthakur.bioguardian.data.datasource.PostsDataSource
 import com.satyamthakur.bioguardian.data.entity.ResourceState
 import com.satyamthakur.bioguardian.ui.composables.HeroCard
+import com.satyamthakur.bioguardian.ui.screens.BioGuardianAppHomeScreen
 import com.satyamthakur.bioguardian.ui.theme.BioGuardianTheme
 import com.satyamthakur.bioguardian.ui.viewmodel.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,17 +34,17 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
-    @Inject
-    lateinit var postData: PostsDataSource
+//
+//    @Inject
+//    lateinit var postData: PostsDataSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        GlobalScope.launch {
-            val res = postData.getPost()
-            Log.d("MainActivity", res.body().toString())
-        }
+//
+//        GlobalScope.launch {
+//            val res = postData.getPost()
+//            Log.d("MainActivity", res.body().toString())
+//        }
 
         setContent {
             BioGuardianTheme {
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize()
                             .padding(16.dp)
                     ) {
-                        HeroCard()
+                        BioGuardianAppHomeScreen()
                     }
                 }
             }
