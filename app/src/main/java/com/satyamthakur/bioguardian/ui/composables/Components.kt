@@ -98,59 +98,6 @@ fun HeroCard() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ExploreMoreCards(title: String) {
-    Card(
-        modifier = Modifier.size(155.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = md_theme_light_tertiaryContainer,
-        ),
-        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
-        ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            Text(
-                text = title,
-                fontFamily = Montserrat,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 16.sp,
-                lineHeight = 24.sp
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            OutlinedButton(
-                modifier = Modifier.align(Alignment.End),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White,
-                ),
-                border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
-                onClick = { /*TODO*/ }) {
-                Icon(
-                    imageVector = Icons.Filled.KeyboardArrowRight,
-                    contentDescription = null,
-                    modifier = Modifier.size(ButtonDefaults.IconSize),
-                    tint = md_theme_light_onTertiaryContainer
-                )
-                Text(
-                    text = "View",
-                    fontFamily = Montserrat,
-                    fontSize = 12.sp,
-                    color = md_theme_light_onTertiaryContainer
-                )
-            }
-        }
-    }
-}
-
-@Preview()
-@Composable
-fun PrevExplore() {
-    ExploreMoreCards("Nearby\nReserves")
-}
-
 @Preview()
 @Composable
 fun PrevHero() {
