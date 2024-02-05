@@ -92,6 +92,9 @@ dependencies {
     val kotlinxCoroutines = "1.7.3"
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutines")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxCoroutines")
+
+    // Coil image loading library
+    implementation("io.coil-kt:coil-compose:2.5.0")
 }
 
 kapt {

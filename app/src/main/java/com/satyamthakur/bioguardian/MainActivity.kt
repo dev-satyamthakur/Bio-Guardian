@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,6 +27,7 @@ import com.satyamthakur.bioguardian.data.entity.ResourceState
 import com.satyamthakur.bioguardian.ui.composables.HeroCard
 import com.satyamthakur.bioguardian.ui.screens.BioGuardianAppHomeScreen
 import com.satyamthakur.bioguardian.ui.theme.BioGuardianTheme
+import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
 import com.satyamthakur.bioguardian.ui.viewmodel.PostViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
@@ -51,15 +53,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = md_theme_light_background
                 ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp)
-                    ) {
-                        BioGuardianAppHomeScreen()
-                    }
+                    BioGuardianAppHomeScreen()
                 }
             }
         }

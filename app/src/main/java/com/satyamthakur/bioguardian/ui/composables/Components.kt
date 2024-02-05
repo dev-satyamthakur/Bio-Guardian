@@ -41,6 +41,7 @@ import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
 @Composable
 fun HeroCard() {
     Card(
+        modifier = Modifier.padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(
             containerColor = md_theme_light_tertiaryContainer
         )
@@ -100,13 +101,13 @@ fun HeroCard() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ExploreMoreCards(title: String) {
-    OutlinedCard(
-        modifier = Modifier.size(170.dp),
+    Card(
+        modifier = Modifier.size(155.dp),
         colors = CardDefaults.cardColors(
             containerColor = md_theme_light_tertiaryContainer,
         ),
         border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
-        onClick = { /*TODO*/ }) {
+        ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -116,7 +117,7 @@ fun ExploreMoreCards(title: String) {
                 text = title,
                 fontFamily = Montserrat,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 20.sp,
+                fontSize = 16.sp,
                 lineHeight = 24.sp
             )
             Spacer(modifier = Modifier.weight(1f))
