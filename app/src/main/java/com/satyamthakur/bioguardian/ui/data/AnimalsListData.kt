@@ -1,5 +1,7 @@
 package com.satyamthakur.bioguardian.ui.data
 
+import com.satyamthakur.bioguardian.ui.model.Animal
+
 val animalsListData = listOf(
     Animal(
         "Cheetah",

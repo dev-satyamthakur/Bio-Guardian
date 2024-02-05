@@ -79,7 +79,8 @@ fun ExploreMoreCard(title: String) {
                 fontFamily = Montserrat,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp,
-                lineHeight = 24.sp
+                lineHeight = 24.sp,
+                color = md_theme_light_onTertiaryContainer
             )
             Spacer(modifier = Modifier.weight(1f))
             Image(
@@ -87,26 +88,6 @@ fun ExploreMoreCard(title: String) {
                 painter = painterResource(id = R.drawable.polypodium_leaves),
                 contentDescription = null
             )
-//            OutlinedButton(
-//                modifier = Modifier.align(Alignment.End),
-//                colors = ButtonDefaults.buttonColors(
-//                    containerColor = Color.White,
-//                ),
-//                border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
-//                onClick = { /*TODO*/ }) {
-//                Icon(
-//                    imageVector = Icons.Filled.KeyboardArrowRight,
-//                    contentDescription = null,
-//                    modifier = Modifier.size(ButtonDefaults.IconSize),
-//                    tint = md_theme_light_onTertiaryContainer
-//                )
-//                Text(
-//                    text = "View",
-//                    fontFamily = Montserrat,
-//                    fontSize = 12.sp,
-//                    color = md_theme_light_onTertiaryContainer
-//                )
-//            }
         }
     }
 }

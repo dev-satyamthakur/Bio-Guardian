@@ -1,4 +1,4 @@
-package com.satyamthakur.bioguardian.ui.data
+package com.satyamthakur.bioguardian.ui.model
 
 data class Animal(
     val name: String,

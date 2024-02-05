@@ -2,37 +2,36 @@ package com.satyamthakur.bioguardian
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Send
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Send
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.satyamthakur.bioguardian.data.api.ApiService
-import com.satyamthakur.bioguardian.data.datasource.PostsDataSource
-import com.satyamthakur.bioguardian.data.entity.ResourceState
-import com.satyamthakur.bioguardian.ui.composables.HeroCard
+import androidx.compose.ui.graphics.Color
+import com.satyamthakur.bioguardian.ui.model.BottomNavigationItem
 import com.satyamthakur.bioguardian.ui.screens.BioGuardianAppHomeScreen
 import com.satyamthakur.bioguardian.ui.theme.BioGuardianTheme
-import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
-import com.satyamthakur.bioguardian.ui.viewmodel.PostViewModel
+import com.satyamthakur.bioguardian.ui.theme.accentColor
+import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlin.reflect.KProperty
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -40,6 +39,7 @@ class MainActivity : ComponentActivity() {
 //    @Inject
 //    lateinit var postData: PostsDataSource
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //
@@ -51,15 +51,72 @@ class MainActivity : ComponentActivity() {
         setContent {
             BioGuardianTheme {
                 // A surface container using the 'background' color from the theme
+
+                val bottomNavItems = listOf(
+                    BottomNavigationItem(
+                        title = "Home",
+                        selectedIcon = Icons.Filled.Home,
+                        unselectedIcon = Icons.Outlined.Home
+                    ),
+                    BottomNavigationItem(
+                        title = "Upload",
+                        selectedIcon = Icons.Filled.Send,
+                        unselectedIcon = Icons.Outlined.Send
+                    ),
+                    BottomNavigationItem(
+                        title = "Settings",
+                        selectedIcon = Icons.Filled.Settings,
+                        unselectedIcon = Icons.Outlined.Settings
+                    ),
+                )
+
+                var selectedItemIndex by rememberSaveable {
+                    mutableStateOf(0)
+                }
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = md_theme_light_background
+                    color = Color(0xFFFAFDFB)
                 ) {
-                    BioGuardianAppHomeScreen()
+                    Scaffold(
+                        bottomBar = {
+                            NavigationBar(
+                                containerColor = md_theme_light_tertiaryContainer,
+                            ) {
+                                bottomNavItems.forEachIndexed { index, item ->
+                                    NavigationBarItem(
+                                        colors = NavigationBarItemDefaults.colors(
+                                            indicatorColor = accentColor
+                                        ),
+                                        selected = selectedItemIndex == index,
+                                        onClick = {
+                                            selectedItemIndex = index
+                                        },
+                                        icon = {
+                                            Icon(
+                                                imageVector = if (selectedItemIndex == index)
+                                                    item.selectedIcon else item.unselectedIcon,
+                                                contentDescription = null
+                                            )
+                                        },
+                                        label = {
+                                            Text(text = item.title)
+                                        },
+                                    )
+                                }
+                            }
+                        }
+                    ) { paddingValues ->
+                        BioGuardianAppHomeScreen(paddingValues)
+                    }
                 }
             }
         }
     }
+}
+
+private operator fun Any.getValue(nothing: Nothing?, property: KProperty<*>): Any {
+    TODO("Not yet implemented")
 }
 //
 //@Composable

@@ -2,6 +2,7 @@ package com.satyamthakur.bioguardian.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,12 +20,12 @@ import com.satyamthakur.bioguardian.ui.composables.HeroCard
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
 
 @Composable
-fun BioGuardianAppHomeScreen() {
+fun BioGuardianAppHomeScreen(paddingValues: PaddingValues) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding()
+            .padding(paddingValues)
             .verticalScroll(scrollState)
     ) {
         Spacer(modifier = Modifier.height(10.dp))
@@ -42,5 +43,5 @@ fun BioGuardianAppHomeScreen() {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPrev() {
-    BioGuardianAppHomeScreen()
+    BioGuardianAppHomeScreen(paddingValues = PaddingValues())
 }
