@@ -108,10 +108,10 @@ class MainActivity : ComponentActivity() {
                         val navController = rememberNavController()
                         NavHost(navController = navController, startDestination = Endpoints.HOME_SCREEN) {
                             composable(Endpoints.HOME_SCREEN) {
-                                BioGuardianAppHomeScreen(paddingValues)
+                                BioGuardianAppHomeScreen(paddingValues, navController)
                             }
                             composable(Endpoints.ANIMAL_DESC) {
-                                AnimalDescriptionScreen()
+                                AnimalDescriptionScreen(paddingValues, navController)
                             }
                         }
 

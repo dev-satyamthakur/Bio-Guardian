@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.satyamthakur.bioguardian.ui.composables.EndangeredNowSection
 import com.satyamthakur.bioguardian.ui.composables.ExploreMoreSection
 import com.satyamthakur.bioguardian.ui.composables.HeadingToolbar
@@ -20,7 +22,7 @@ import com.satyamthakur.bioguardian.ui.composables.HeroCard
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
 
 @Composable
-fun BioGuardianAppHomeScreen(paddingValues: PaddingValues) {
+fun BioGuardianAppHomeScreen(paddingValues: PaddingValues, navController: NavController) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -35,7 +37,7 @@ fun BioGuardianAppHomeScreen(paddingValues: PaddingValues) {
         Spacer(modifier = Modifier.height(20.dp))
         ExploreMoreSection()
         Spacer(modifier = Modifier.height(20.dp))
-        EndangeredNowSection()
+        EndangeredNowSection(navController)
         Spacer(modifier = Modifier.height(20.dp))
     }
 }
@@ -43,5 +45,6 @@ fun BioGuardianAppHomeScreen(paddingValues: PaddingValues) {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPrev() {
-    BioGuardianAppHomeScreen(paddingValues = PaddingValues())
+    val navController = rememberNavController()
+    BioGuardianAppHomeScreen(paddingValues = PaddingValues(), navController)
 }

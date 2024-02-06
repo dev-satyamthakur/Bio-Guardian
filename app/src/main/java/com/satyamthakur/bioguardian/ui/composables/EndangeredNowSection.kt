@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,46 +25,52 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.satyamthakur.bioguardian.R
 import com.satyamthakur.bioguardian.ui.model.Animal
 import com.satyamthakur.bioguardian.ui.data.animalsListData
+import com.satyamthakur.bioguardian.ui.navigation.Endpoints
 import com.satyamthakur.bioguardian.ui.theme.Montserrat
 import com.satyamthakur.bioguardian.ui.theme.Roboto
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_onTertiaryContainer
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
 
 @Composable
-fun EndangeredNowSection() {
+fun EndangeredNowSection(navController: NavController) {
     Column() {
         EndangeredNowSectionHeading()
         Spacer(modifier = Modifier.height(14.dp))
-        EndangeredAnimalsList()
+        EndangeredAnimalsList(navController)
     }
 }
 
 @Composable
-fun EndangeredAnimalsList() {
+fun EndangeredAnimalsList(navController: NavController) {
     LazyRow(
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(animalsListData) { animal ->
-            EndangeredAnimalItemCard(animal = animal)
+            EndangeredAnimalItemCard(animal = animal, navController)
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EndangeredAnimalItemCard(
-    animal: Animal
+    animal: Animal,
+    navController: NavController
 ) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = md_theme_light_tertiaryContainer
         ),
         modifier = Modifier,
-        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer)
+        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
+        onClick = { navController.navigate(Endpoints.ANIMAL_DESC) }
     ) {
         Column(
             modifier = Modifier
@@ -99,7 +106,9 @@ fun EndangeredAnimalItemCard(
 @Composable
 fun EndangeredNowSectionHeading() {
     Row(
-        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -123,5 +132,6 @@ fun EndangeredNowSectionHeading() {
 @Preview(showBackground = true)
 @Composable
 fun EndangeredNowPreview() {
-    EndangeredNowSection()
+    val navController = rememberNavController()
+    EndangeredNowSection(navController)
 }

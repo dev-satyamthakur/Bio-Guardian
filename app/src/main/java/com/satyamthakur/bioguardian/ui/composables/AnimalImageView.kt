@@ -22,7 +22,7 @@ fun AnimalImageView(image: String) {
     ) {
         AsyncImage(
             placeholder = painterResource(id = R.drawable.image_place),
-            modifier = Modifier.height(250.dp),
+            modifier = Modifier.height(220.dp),
             model = image,
             contentScale = ContentScale.Crop,
             contentDescription = null

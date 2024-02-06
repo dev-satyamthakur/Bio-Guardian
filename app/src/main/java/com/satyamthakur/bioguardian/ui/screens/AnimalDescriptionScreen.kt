@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -29,16 +31,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.satyamthakur.bioguardian.ui.composables.AnimalImageView
 import com.satyamthakur.bioguardian.ui.theme.Montserrat
 import com.satyamthakur.bioguardian.ui.theme.Roboto
@@ -49,7 +53,11 @@ import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnimalDescriptionScreen() {
+fun AnimalDescriptionScreen(paddingValues: PaddingValues, navController: NavController) {
+
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -66,15 +74,17 @@ fun AnimalDescriptionScreen() {
                     titleContentColor = md_theme_light_onTertiaryContainer,
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description"
                         )
                     }
-                }
+                },
+                scrollBehavior = scrollBehavior
             )
-        }
+        },
+        modifier = Modifier.padding(paddingValues),
     ) { paddingValues ->
         AnimalDescriptionScreenBody(paddingValues = paddingValues)
     }
@@ -82,11 +92,13 @@ fun AnimalDescriptionScreen() {
 
 @Composable
 fun AnimalDescriptionScreenBody(paddingValues: PaddingValues) {
+    val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(md_theme_light_background)
             .padding(paddingValues)
+            .verticalScroll(scrollState)
     ) {
         Spacer(modifier = Modifier.height(10.dp))
         AnimalImageView(image = "https://cdn.britannica.com/98/152298-050-8E45510A/Cheetah.jpg")
@@ -143,6 +155,9 @@ fun AnimalDescriptionScreenBody(paddingValues: PaddingValues) {
                 fontWeight = FontWeight.SemiBold
             )
         }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
     }
 }
 
@@ -197,7 +212,8 @@ fun AnimalFactItem(fact: String) {
 @Preview(showBackground = true)
 @Composable
 fun AnimalDescPrev() {
-    AnimalDescriptionScreen()
+    val navController = rememberNavController()
+    AnimalDescriptionScreen(paddingValues = PaddingValues(), navController = navController)
 }
 
 
