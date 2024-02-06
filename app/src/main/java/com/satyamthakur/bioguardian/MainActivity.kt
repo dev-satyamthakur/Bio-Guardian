@@ -25,7 +25,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.satyamthakur.bioguardian.ui.model.BottomNavigationItem
+import com.satyamthakur.bioguardian.ui.navigation.Endpoints
+import com.satyamthakur.bioguardian.ui.screens.AnimalDescriptionScreen
 import com.satyamthakur.bioguardian.ui.screens.BioGuardianAppHomeScreen
 import com.satyamthakur.bioguardian.ui.theme.BioGuardianTheme
 import com.satyamthakur.bioguardian.ui.theme.accentColor
@@ -35,18 +40,10 @@ import kotlin.reflect.KProperty
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-//
-//    @Inject
-//    lateinit var postData: PostsDataSource
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//
-//        GlobalScope.launch {
-//            val res = postData.getPost()
-//            Log.d("MainActivity", res.body().toString())
-//        }
 
         setContent {
             BioGuardianTheme {
@@ -107,7 +104,18 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     ) { paddingValues ->
-                        BioGuardianAppHomeScreen(paddingValues)
+
+                        val navController = rememberNavController()
+                        NavHost(navController = navController, startDestination = Endpoints.HOME_SCREEN) {
+                            composable(Endpoints.HOME_SCREEN) {
+                                BioGuardianAppHomeScreen(paddingValues)
+                            }
+                            composable(Endpoints.ANIMAL_DESC) {
+                                AnimalDescriptionScreen()
+                            }
+                        }
+
+
                     }
                 }
             }
@@ -115,30 +123,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-private operator fun Any.getValue(nothing: Nothing?, property: KProperty<*>): Any {
-    TODO("Not yet implemented")
-}
-//
-//@Composable
-//fun ShowPost(postViewModel: PostViewModel = hiltViewModel()) {
-//    val postRes by postViewModel.post.collectAsState()
-//
-//    Box(
-//        modifier = Modifier.fillMaxSize(),
-//        contentAlignment = Alignment.Center
-//    ) {
-//        when (postRes) {
-//            is ResourceState.Loading -> {
-//                Text(text = "Loading...", fontSize = 25.sp)
-//            }
-//            is ResourceState.Success -> {
-//                val response = (postRes as ResourceState.Success).data
-//                Text(text = response.body.toString(), fontSize = 25.sp)
-//            }
-//            is ResourceState.Error -> {
-//
-//            }
-//        }
-//    }
-//
-//}
