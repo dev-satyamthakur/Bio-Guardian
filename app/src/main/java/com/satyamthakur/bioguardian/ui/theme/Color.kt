@@ -2,9 +2,10 @@ package com.satyamthakur.bioguardian.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val accentColor = Color(0xFFF3A361)
+val accentColor = Color(0xFF31AD4B)
+val onAccent = Color(0xFF087C25)
 
-val md_theme_light_primary = Color(0xFF49A345)
+val md_theme_light_primary = Color(0xFF31AD4B)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFF76F8E2)
 val md_theme_light_onPrimaryContainer = Color(0xFF00201B)
@@ -14,13 +15,13 @@ val md_theme_light_secondaryContainer = Color(0xFFFFDDBA)
 val md_theme_light_onSecondaryContainer = Color(0xFF2B1700)
 val md_theme_light_tertiary = Color(0xFF006E1C)
 val md_theme_light_onTertiary = Color(0xFFFFFFFF)
-val md_theme_light_tertiaryContainer = Color(0xFF94F990)
+val md_theme_light_tertiaryContainer = Color(0xFFFCFCFC)
 val md_theme_light_onTertiaryContainer = Color(0xFF002204)
 val md_theme_light_error = Color(0xFFBA1A1A)
 val md_theme_light_errorContainer = Color(0xFFFFDAD6)
 val md_theme_light_onError = Color(0xFFFFFFFF)
 val md_theme_light_onErrorContainer = Color(0xFF410002)
-val md_theme_light_background = Color(0xFFFAFDFB)
+val md_theme_light_background = Color(0xFFEEEEEE)
 val md_theme_light_onBackground = Color(0xFF191C1B)
 val md_theme_light_surface = Color(0xFFFAFDFB)
 val md_theme_light_onSurface = Color(0xFF191C1B)

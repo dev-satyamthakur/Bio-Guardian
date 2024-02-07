@@ -69,7 +69,6 @@ fun EndangeredAnimalItemCard(
             containerColor = md_theme_light_tertiaryContainer
         ),
         modifier = Modifier,
-        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
         onClick = { navController.navigate(Endpoints.ANIMAL_DESC) }
     ) {
         Column(

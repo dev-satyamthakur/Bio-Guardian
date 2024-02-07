@@ -34,14 +34,16 @@ import com.satyamthakur.bioguardian.ui.screens.AnimalDescriptionScreen
 import com.satyamthakur.bioguardian.ui.screens.BioGuardianAppHomeScreen
 import com.satyamthakur.bioguardian.ui.theme.BioGuardianTheme
 import com.satyamthakur.bioguardian.ui.theme.accentColor
+import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
+import com.satyamthakur.bioguardian.ui.theme.onAccent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.reflect.KProperty
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -71,6 +73,8 @@ class MainActivity : ComponentActivity() {
                     mutableStateOf(0)
                 }
 
+                val navController = rememberNavController()
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = Color(0xFFFAFDFB)
@@ -78,16 +82,28 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         bottomBar = {
                             NavigationBar(
-                                containerColor = md_theme_light_tertiaryContainer,
+                                containerColor = accentColor,
                             ) {
                                 bottomNavItems.forEachIndexed { index, item ->
                                     NavigationBarItem(
                                         colors = NavigationBarItemDefaults.colors(
-                                            indicatorColor = accentColor
+                                            indicatorColor = onAccent,
+                                            selectedIconColor = Color.White,
+                                            unselectedIconColor = Color.White,
+                                            selectedTextColor = Color.White,
+                                            unselectedTextColor = Color.White
                                         ),
                                         selected = selectedItemIndex == index,
                                         onClick = {
                                             selectedItemIndex = index
+                                            if (index == 0) {
+                                                navController.popBackStack()
+                                                navController.navigate(Endpoints.HOME_SCREEN)
+                                            }
+                                            if (index == 1) {
+                                                navController.popBackStack()
+                                                navController.navigate(Endpoints.ANIMAL_DESC)
+                                            }
                                         },
                                         icon = {
                                             Icon(
@@ -105,8 +121,11 @@ class MainActivity : ComponentActivity() {
                         }
                     ) { paddingValues ->
 
-                        val navController = rememberNavController()
-                        NavHost(navController = navController, startDestination = Endpoints.HOME_SCREEN) {
+
+                        NavHost(
+                            navController = navController,
+                            startDestination = Endpoints.HOME_SCREEN
+                        ) {
                             composable(Endpoints.HOME_SCREEN) {
                                 BioGuardianAppHomeScreen(paddingValues, navController)
                             }

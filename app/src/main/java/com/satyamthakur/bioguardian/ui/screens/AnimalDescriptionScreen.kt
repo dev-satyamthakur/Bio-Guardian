@@ -36,6 +36,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,10 +56,13 @@ import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
 @Composable
 fun AnimalDescriptionScreen(paddingValues: PaddingValues, navController: NavController) {
 
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
 
 
     Scaffold(
+        modifier = Modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection)
+            .padding(paddingValues),
         topBar = {
             TopAppBar(
                 title = {
@@ -84,7 +88,6 @@ fun AnimalDescriptionScreen(paddingValues: PaddingValues, navController: NavCont
                 scrollBehavior = scrollBehavior
             )
         },
-        modifier = Modifier.padding(paddingValues),
     ) { paddingValues ->
         AnimalDescriptionScreenBody(paddingValues = paddingValues)
     }

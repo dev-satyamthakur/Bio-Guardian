@@ -66,7 +66,6 @@ fun ExploreMoreCard(title: String) {
         colors = CardDefaults.cardColors(
             containerColor = md_theme_light_tertiaryContainer,
         ),
-        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
         onClick = {  }
     ) {
         Column(
