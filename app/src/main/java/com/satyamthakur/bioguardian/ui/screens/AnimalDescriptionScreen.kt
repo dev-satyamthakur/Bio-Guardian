@@ -56,15 +56,14 @@ import com.satyamthakur.bioguardian.ui.theme.onAccent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AnimalDescriptionScreen(paddingValues: PaddingValues, navController: NavController) {
+fun AnimalDescriptionScreen(navController: NavController) {
 
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior(rememberTopAppBarState())
 
 
     Scaffold(
         modifier = Modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection)
-            .padding(paddingValues),
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = {
@@ -215,7 +214,7 @@ fun AnimalFactItem(fact: String) {
 @Composable
 fun AnimalDescPrev() {
     val navController = rememberNavController()
-    AnimalDescriptionScreen(paddingValues = PaddingValues(), navController = navController)
+    AnimalDescriptionScreen(navController = navController)
 }
 
 

@@ -33,7 +33,7 @@ fun HeadingToolbar() {
             Text(
                 text = "Bio-Guardian",
                 fontFamily = Montserrat,
-                fontWeight = FontWeight.SemiBold,
+                fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
             )
             Text(

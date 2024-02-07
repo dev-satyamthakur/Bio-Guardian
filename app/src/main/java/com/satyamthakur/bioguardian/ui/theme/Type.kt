@@ -10,7 +10,8 @@ import com.satyamthakur.bioguardian.R
 
 val Montserrat = FontFamily(
     Font(R.font.monteserrat_medium, FontWeight.Medium),
-    Font(R.font.montserrat_semibold, FontWeight.SemiBold)
+    Font(R.font.montserrat_semibold, FontWeight.SemiBold),
+    Font(R.font.montserrat_bold, FontWeight.Bold)
 )
 
 val Roboto = FontFamily(

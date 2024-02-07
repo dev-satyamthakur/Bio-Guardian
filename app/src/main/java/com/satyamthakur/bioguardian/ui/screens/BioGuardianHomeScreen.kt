@@ -22,7 +22,7 @@ import com.satyamthakur.bioguardian.ui.composables.HeroCard
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
 
 @Composable
-fun BioGuardianAppHomeScreen(paddingValues: PaddingValues, navController: NavController) {
+fun BioGuardianAppHomeScreen(paddingValues: PaddingValues, homeScreenNavController: NavController) {
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
@@ -37,7 +37,7 @@ fun BioGuardianAppHomeScreen(paddingValues: PaddingValues, navController: NavCon
         Spacer(modifier = Modifier.height(20.dp))
         ExploreMoreSection()
         Spacer(modifier = Modifier.height(20.dp))
-        EndangeredNowSection(navController)
+        EndangeredNowSection(homeScreenNavController)
         Spacer(modifier = Modifier.height(20.dp))
     }
 }
