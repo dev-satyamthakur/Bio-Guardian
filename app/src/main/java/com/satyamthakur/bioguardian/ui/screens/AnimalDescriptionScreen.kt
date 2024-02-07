@@ -36,6 +36,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -51,6 +52,7 @@ import com.satyamthakur.bioguardian.ui.theme.accentColor
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_onTertiaryContainer
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
+import com.satyamthakur.bioguardian.ui.theme.onAccent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -128,7 +130,7 @@ fun AnimalDescriptionScreenBody(paddingValues: PaddingValues) {
         Text(
             text = "Facts",
             fontFamily = Montserrat,
-            fontSize = 28.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
             color = md_theme_light_onTertiaryContainer,
             modifier = Modifier
@@ -143,17 +145,16 @@ fun AnimalDescriptionScreenBody(paddingValues: PaddingValues) {
         Button(
             onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(
-                containerColor = md_theme_light_tertiaryContainer
+                containerColor = accentColor
             ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
                 .align(Alignment.End),
-            border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer)
         ) {
             Text(
                 text = "KNOW MORE",
-                color = md_theme_light_onTertiaryContainer,
+                color = Color.White,
                 fontFamily = Montserrat,
                 fontWeight = FontWeight.SemiBold
             )
@@ -172,8 +173,7 @@ fun AnimalFactsCard() {
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp),
-        border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer)
+            .padding(horizontal = 16.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
@@ -195,10 +195,9 @@ fun AnimalFactItem(fact: String) {
     ) {
         Box(
             modifier = Modifier
-                .size(10.dp)
+                .size(8.dp)
                 .clip(CircleShape)
-                .background(accentColor)
-                .border(2.dp, md_theme_light_onTertiaryContainer, CircleShape),
+                .background(onAccent)
         )
         Spacer(modifier = Modifier.width(10.dp))
         Text(
@@ -206,7 +205,7 @@ fun AnimalFactItem(fact: String) {
             fontFamily = Roboto,
             fontSize = 16.sp,
             lineHeight = 24.sp,
-            modifier = Modifier.offset(y = -6.dp)
+            modifier = Modifier.offset(y = -7.dp)
         )
     }
 }

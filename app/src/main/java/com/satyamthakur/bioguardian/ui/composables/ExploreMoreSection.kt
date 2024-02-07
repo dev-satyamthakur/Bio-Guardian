@@ -50,7 +50,7 @@ val exploreTitles = listOf(
 fun ExploreMoreSection() {
     LazyRow(
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         items(exploreTitles) { title ->
             ExploreMoreCard(title = title)
