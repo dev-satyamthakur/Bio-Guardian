@@ -104,7 +104,6 @@ fun AnimalDescriptionScreenBody(paddingValues: PaddingValues) {
             .padding(paddingValues)
             .verticalScroll(scrollState)
     ) {
-        Spacer(modifier = Modifier.height(10.dp))
         AnimalImageView(image = "https://cdn.britannica.com/98/152298-050-8E45510A/Cheetah.jpg")
         Spacer(modifier = Modifier.height(20.dp))
         Text(

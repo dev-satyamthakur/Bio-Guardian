@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PhotoCameraBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -127,6 +128,12 @@ fun SelectAnImageCardWithHeading() {
                     contentDescription = null,
                     modifier = Modifier.fillMaxSize()
                 )
+            }
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+        if (imageUri != null) {
+            Button(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
+                Text(text = "Upload Now")
             }
         }
     }

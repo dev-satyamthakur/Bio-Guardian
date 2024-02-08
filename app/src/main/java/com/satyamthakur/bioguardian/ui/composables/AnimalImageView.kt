@@ -15,17 +15,14 @@ import com.satyamthakur.bioguardian.R
 
 @Composable
 fun AnimalImageView(image: String) {
-    Card(
+    AsyncImage(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-    ) {
-        AsyncImage(
-            placeholder = painterResource(id = R.drawable.image_place),
-            modifier = Modifier.height(220.dp),
-            model = image,
-            contentScale = ContentScale.Crop,
-            contentDescription = null
-        )
-    }
+            .height(220.dp),
+        placeholder = painterResource(id = R.drawable.image_place),
+        model = image,
+        contentScale = ContentScale.Crop,
+        contentDescription = null
+    )
+
 }
