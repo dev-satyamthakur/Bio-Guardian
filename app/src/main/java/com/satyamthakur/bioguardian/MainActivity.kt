@@ -5,10 +5,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CloudUpload
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.CloudUpload
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Send
 import androidx.compose.material.icons.outlined.Settings
@@ -26,6 +29,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -69,8 +73,6 @@ class MainActivity : ComponentActivity() {
                         AnimalDescriptionScreen(navController = homeScreenNavController)
                     }
                 }
-
-
             }
         }
     }
@@ -88,8 +90,8 @@ fun Dashboard(
         ),
         BottomNavigationItem(
             title = "Upload",
-            selectedIcon = Icons.Filled.Send,
-            unselectedIcon = Icons.Outlined.Send
+            selectedIcon = Icons.Filled.CloudUpload,
+            unselectedIcon = Icons.Outlined.CloudUpload
         ),
         BottomNavigationItem(
             title = "Settings",
@@ -112,6 +114,7 @@ fun Dashboard(
             bottomBar = {
                 NavigationBar(
                     containerColor = accentColor,
+                    modifier = Modifier.height(64.dp)
                 ) {
                     bottomNavItems.forEachIndexed { index, item ->
                         NavigationBarItem(
@@ -141,9 +144,7 @@ fun Dashboard(
                                     contentDescription = null
                                 )
                             },
-                            label = {
-                                Text(text = item.title)
-                            },
+                            alwaysShowLabel = false,
                         )
                     }
                 }
