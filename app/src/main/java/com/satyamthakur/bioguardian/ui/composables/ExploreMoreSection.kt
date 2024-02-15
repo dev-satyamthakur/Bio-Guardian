@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -48,6 +49,15 @@ val exploreTitles = listOf(
 
 @Composable
 fun ExploreMoreSection() {
+    Text(
+        modifier = Modifier.padding(horizontal = 16.dp),
+        text = "Explore More",
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.SemiBold,
+        fontSize = 20.sp,
+        color = md_theme_light_onTertiaryContainer
+    )
+    Spacer(modifier = Modifier.height(10.dp))
     LazyRow(
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -83,7 +93,10 @@ fun ExploreMoreCard(title: String) {
             )
             Spacer(modifier = Modifier.weight(1f))
             Image(
-                modifier = Modifier.align(Alignment.End).size(120.dp).offset(x = 10.dp ,y = 12.dp),
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .size(120.dp)
+                    .offset(x = 10.dp, y = 12.dp),
                 painter = painterResource(id = R.drawable.polypodium_leaves),
                 contentDescription = null
             )

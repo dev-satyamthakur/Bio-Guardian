@@ -43,9 +43,9 @@ fun BioGuardianAppHomeScreen(paddingValues: PaddingValues, homeScreenNavControll
         Spacer(modifier = Modifier.height(20.dp))
         HeroCard()
         Spacer(modifier = Modifier.height(20.dp))
-        ExploreMoreSection()
-        Spacer(modifier = Modifier.height(20.dp))
         EndangeredNowSection(homeScreenNavController)
+        Spacer(modifier = Modifier.height(20.dp))
+        ExploreMoreSection()
         Spacer(modifier = Modifier.height(20.dp))
     }
 }
