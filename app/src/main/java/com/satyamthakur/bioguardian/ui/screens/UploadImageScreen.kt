@@ -1,7 +1,7 @@
 package com.satyamthakur.bioguardian.ui.screens
 
 import android.net.Uri
-import android.widget.Space
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
@@ -22,8 +22,10 @@ import androidx.compose.material.icons.filled.PhotoCameraBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,6 +41,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import com.google.firebase.storage.FirebaseStorage
+import com.satyamthakur.bioguardian.di.FirebaseRef
 import com.satyamthakur.bioguardian.ui.theme.Montserrat
 import com.satyamthakur.bioguardian.ui.theme.Roboto
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
@@ -90,6 +94,8 @@ fun SelectAnImageCardWithHeading() {
         }
     )
 
+    var isImageUploading by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -101,6 +107,7 @@ fun SelectAnImageCardWithHeading() {
             fontSize = 16.sp
         )
         Spacer(modifier = Modifier.height(10.dp))
+
         Card(
             modifier = Modifier
                 .width(screenWidth)
@@ -130,9 +137,46 @@ fun SelectAnImageCardWithHeading() {
                 )
             }
         }
+
         Spacer(modifier = Modifier.height(20.dp))
+
+        if (isImageUploading) {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .width(40.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+        }
+
         if (imageUri != null) {
-            Button(onClick = { /*TODO*/ }, modifier = Modifier.fillMaxWidth()) {
+            Button(onClick = {
+                if (!isImageUploading) { // only perform action on button if image is not uploading
+
+                    isImageUploading = true
+
+                    val animalImage =
+                        FirebaseRef.storageRef.child("images/${imageUri!!.lastPathSegment}")
+                    var uploadTask = animalImage.putFile(imageUri!!)
+
+                    imageUri = null // set imageUri to null again while uploading image
+
+                    // Register observers to listen for when the download is done or if it fails
+                    uploadTask.addOnFailureListener {
+                        Log.d("BIOAPP", "Failed to upload")
+                    }.addOnSuccessListener { taskSnapshot ->
+                        // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                        // ...
+                        Log.d("BIOAPP", "Successfully uploaded")
+                        isImageUploading = false
+                        animalImage.getDownloadUrl().addOnSuccessListener { uri ->
+                            val imageUrl: String =
+                                uri.toString() // getting uploaded image url as link
+                            Log.d("BIOAPP", imageUrl)
+                        }
+                    }
+                }
+
+            }, modifier = Modifier.fillMaxWidth()) {
                 Text(text = "Upload Now")
             }
         }
