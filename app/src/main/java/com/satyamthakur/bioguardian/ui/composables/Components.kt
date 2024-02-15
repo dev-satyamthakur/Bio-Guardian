@@ -1,5 +1,7 @@
 package com.satyamthakur.bioguardian.ui.composables
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -23,9 +25,12 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,6 +46,10 @@ import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
 
 @Composable
 fun HeroCard() {
+
+    val context = LocalContext.current
+    val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse("https://www.iucn.org/")) }
+
     Card(
         modifier = Modifier.padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(
@@ -70,15 +79,14 @@ fun HeroCard() {
                     contentDescription = null
                 )
                 Spacer(modifier = Modifier.weight(1f))
-                Button(
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White,
-                    ),
+                OutlinedButton(
                     border = BorderStroke(2.dp, md_theme_light_onTertiaryContainer),
                     modifier = Modifier
                         .align(Alignment.Bottom)
                         .padding(end = 20.dp, bottom = 16.dp),
-                    onClick = { /*TODO*/ }
+                    onClick = {
+                        context.startActivity(intent)
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.KeyboardArrowRight,

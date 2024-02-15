@@ -74,6 +74,7 @@ fun EndangeredAnimalItemCard(
         Column(
             modifier = Modifier
                 .width(180.dp)
+                .height(215.dp)
                 .padding(16.dp),
         ) {
             Card {

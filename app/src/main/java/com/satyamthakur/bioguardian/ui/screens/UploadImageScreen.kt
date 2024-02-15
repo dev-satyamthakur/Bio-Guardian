@@ -150,29 +150,27 @@ fun SelectAnImageCardWithHeading() {
 
         if (imageUri != null) {
             Button(onClick = {
-                if (!isImageUploading) { // only perform action on button if image is not uploading
 
-                    isImageUploading = true
+                isImageUploading = true
 
-                    val animalImage =
-                        FirebaseRef.storageRef.child("images/${imageUri!!.lastPathSegment}")
-                    var uploadTask = animalImage.putFile(imageUri!!)
+                val animalImage =
+                    FirebaseRef.storageRef.child("images/${imageUri!!.lastPathSegment}")
+                var uploadTask = animalImage.putFile(imageUri!!)
 
-                    imageUri = null // set imageUri to null again while uploading image
+                imageUri = null // set imageUri to null again while uploading image
 
-                    // Register observers to listen for when the download is done or if it fails
-                    uploadTask.addOnFailureListener {
-                        Log.d("BIOAPP", "Failed to upload")
-                    }.addOnSuccessListener { taskSnapshot ->
-                        // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-                        // ...
-                        Log.d("BIOAPP", "Successfully uploaded")
-                        isImageUploading = false
-                        animalImage.getDownloadUrl().addOnSuccessListener { uri ->
-                            val imageUrl: String =
-                                uri.toString() // getting uploaded image url as link
-                            Log.d("BIOAPP", imageUrl)
-                        }
+                // Register observers to listen for when the download is done or if it fails
+                uploadTask.addOnFailureListener {
+                    Log.d("BIOAPP", "Failed to upload")
+                }.addOnSuccessListener { taskSnapshot ->
+                    // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+                    // ...
+                    Log.d("BIOAPP", "Successfully uploaded")
+                    isImageUploading = false
+                    animalImage.getDownloadUrl().addOnSuccessListener { uri ->
+                        val imageUrl: String =
+                            uri.toString() // getting uploaded image url as link
+                        Log.d("BIOAPP", imageUrl)
                     }
                 }
 
