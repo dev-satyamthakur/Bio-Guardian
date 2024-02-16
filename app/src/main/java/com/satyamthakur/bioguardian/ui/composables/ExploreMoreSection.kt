@@ -1,5 +1,7 @@
 package com.satyamthakur.bioguardian.ui.composables
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
@@ -18,6 +20,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
@@ -29,22 +32,24 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import com.satyamthakur.bioguardian.R
 import com.satyamthakur.bioguardian.ui.theme.Montserrat
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_onTertiaryContainer
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_tertiaryContainer
 
 val exploreTitles = listOf(
-    "Nearby\nReserves", "Conservation\nEfforts",
-    "Articles\n& Videos"
+    "Nearby\nReserves", "Conservation\nEfforts"
 )
 
 @Composable
@@ -62,21 +67,34 @@ fun ExploreMoreSection() {
         contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        items(exploreTitles) { title ->
-            ExploreMoreCard(title = title)
+        itemsIndexed(exploreTitles) { index, title ->
+            ExploreMoreCard(title = title, index)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExploreMoreCard(title: String) {
+fun ExploreMoreCard(title: String, index: Int) {
+    val context = LocalContext.current
+    val conservationEffortsIntent = remember { Intent(Intent.ACTION_VIEW, Uri.parse("https://www.worldwildlife.org/initiatives/wildlife-conservation")) }
     Card(
         modifier = Modifier.size(154.dp),
         colors = CardDefaults.cardColors(
             containerColor = md_theme_light_tertiaryContainer,
         ),
-        onClick = {  }
+        onClick = {
+            if (index == 0) {
+                val gmmIntentUri = Uri.parse("geo:0,0?q=natural%20reserves")
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                context.startActivity(mapIntent)
+            }
+            else if (index == 1) {
+                context.startActivity(conservationEffortsIntent)
+            }
+        }
+
     ) {
         Column(
             modifier = Modifier
@@ -107,7 +125,7 @@ fun ExploreMoreCard(title: String) {
 @Preview()
 @Composable
 fun PrevExplore() {
-    ExploreMoreCard("Nearby\nReserves")
+    ExploreMoreCard("Nearby\nReserves", 0)
 }
 
 @Preview(showBackground = true)
