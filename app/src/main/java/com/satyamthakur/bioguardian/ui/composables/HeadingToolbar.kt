@@ -44,15 +44,6 @@ fun HeadingToolbar() {
             )
         }
         Spacer(modifier = Modifier.weight(1f))
-        IconButton(
-            onClick = { /*TODO*/ }
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Notifications,
-                contentDescription = null,
-                modifier = Modifier.size(50.dp)
-            )
-        }
     }
 
 }

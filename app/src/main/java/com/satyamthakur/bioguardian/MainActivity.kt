@@ -59,22 +59,21 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             BioGuardianTheme {
-                AnimalIdentifiedScreen()
-//                val homeScreenNavController = rememberNavController()
-//
-//                NavHost(
-//                    navController = homeScreenNavController,
-//                    startDestination = Endpoints.DASHBOARD
-//                ) {
-//                    composable(Endpoints.DASHBOARD) {
-//                        Dashboard(
-//                            homeScreenNavController = homeScreenNavController
-//                        )
-//                    }
-//                    composable(Endpoints.ANIMAL_DESC) {
-//                        AnimalDescriptionScreen(navController = homeScreenNavController)
-//                    }
-//                }
+                val homeScreenNavController = rememberNavController()
+
+                NavHost(
+                    navController = homeScreenNavController,
+                    startDestination = Endpoints.DASHBOARD
+                ) {
+                    composable(Endpoints.DASHBOARD) {
+                        Dashboard(
+                            homeScreenNavController = homeScreenNavController
+                        )
+                    }
+                    composable(Endpoints.ANIMAL_DESC) {
+                        AnimalIdentifiedScreen(navController = homeScreenNavController)
+                    }
+                }
             }
         }
     }
@@ -94,12 +93,7 @@ fun Dashboard(
             title = "Upload",
             selectedIcon = Icons.Filled.CloudUpload,
             unselectedIcon = Icons.Outlined.CloudUpload
-        ),
-        BottomNavigationItem(
-            title = "Settings",
-            selectedIcon = Icons.Filled.Settings,
-            unselectedIcon = Icons.Outlined.Settings
-        ),
+        )
     )
 
     var selectedItemIndex by rememberSaveable {
@@ -160,7 +154,7 @@ fun Dashboard(
                     BioGuardianAppHomeScreen(paddingValues, homeScreenNavController)
                 }
                 composable(BottomEndpoints.UPLOAD) {
-                    UploadImageScreen(paddingValues = paddingValues)
+                    UploadImageScreen(paddingValues = paddingValues, homeScreenNavController)
                 }
             }
         }

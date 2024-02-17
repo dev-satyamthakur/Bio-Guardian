@@ -40,15 +40,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.storage.FirebaseStorage
 import com.satyamthakur.bioguardian.di.FirebaseRef
+import com.satyamthakur.bioguardian.ui.navigation.Endpoints
 import com.satyamthakur.bioguardian.ui.theme.Montserrat
 import com.satyamthakur.bioguardian.ui.theme.Roboto
 import com.satyamthakur.bioguardian.ui.theme.md_theme_light_background
 
 @Composable
-fun UploadImageScreen(paddingValues: PaddingValues) {
+fun UploadImageScreen(paddingValues: PaddingValues, navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -59,7 +62,7 @@ fun UploadImageScreen(paddingValues: PaddingValues) {
         Spacer(modifier = Modifier.height(10.dp))
         UploadImageScreenTitle()
         Spacer(modifier = Modifier.height(20.dp))
-        SelectAnImageCardWithHeading()
+        SelectAnImageCardWithHeading(navController)
     }
 }
 
@@ -78,7 +81,7 @@ fun UploadImageScreenTitle() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SelectAnImageCardWithHeading() {
+fun SelectAnImageCardWithHeading(navController: NavController) {
 
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp.dp
@@ -172,6 +175,7 @@ fun SelectAnImageCardWithHeading() {
                             uri.toString() // getting uploaded image url as link
                         Log.d("BIOAPP", imageUrl)
                     }
+                    navController.navigate(Endpoints.ANIMAL_DESC)
                 }
 
             }, modifier = Modifier.fillMaxWidth()) {
@@ -184,6 +188,6 @@ fun SelectAnImageCardWithHeading() {
 @Preview(showBackground = true)
 @Composable
 fun UploadImagePrev() {
-    UploadImageScreen(paddingValues = PaddingValues())
+    UploadImageScreen(paddingValues = PaddingValues(), rememberNavController())
 }
 

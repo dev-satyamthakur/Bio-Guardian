@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.satyamthakur.bioguardian.R
 import com.satyamthakur.bioguardian.ui.model.Animal
 import com.satyamthakur.bioguardian.ui.data.animalsListData
@@ -69,7 +71,7 @@ fun EndangeredAnimalItemCard(
             containerColor = md_theme_light_tertiaryContainer
         ),
         modifier = Modifier,
-        onClick = { navController.navigate(Endpoints.ANIMAL_DESC) }
+        onClick = { }
     ) {
         Column(
             modifier = Modifier
@@ -80,7 +82,10 @@ fun EndangeredAnimalItemCard(
             Card {
                 AsyncImage(
                     placeholder = painterResource(id = R.drawable.image_place),
-                    model = animal.imageLink,
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(animal.imageLink)
+                        .crossfade(true)
+                        .build(),
                     contentDescription = null,
                     modifier = Modifier.height(100.dp),
                     contentScale = ContentScale.Crop
@@ -116,14 +121,6 @@ fun EndangeredNowSectionHeading() {
             fontFamily = Montserrat,
             fontWeight = FontWeight.SemiBold,
             fontSize = 20.sp,
-            color = md_theme_light_onTertiaryContainer
-        )
-        Spacer(modifier = Modifier.weight(1f))
-        Text(
-            text = "view all",
-            fontFamily = Montserrat,
-            fontSize = 14.sp,
-            fontWeight = FontWeight.Medium,
             color = md_theme_light_onTertiaryContainer
         )
     }
