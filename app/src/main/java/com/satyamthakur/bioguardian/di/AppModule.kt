@@ -1,6 +1,7 @@
 package com.satyamthakur.bioguardian.di
 
 import com.google.firebase.storage.FirebaseStorage
+import com.satyamthakur.bioguardian.BuildConfig
 import com.satyamthakur.bioguardian.data.api.ApiService
 import com.satyamthakur.bioguardian.data.datasource.PostDataSourceImpl
 import com.satyamthakur.bioguardian.data.datasource.PostsDataSource
