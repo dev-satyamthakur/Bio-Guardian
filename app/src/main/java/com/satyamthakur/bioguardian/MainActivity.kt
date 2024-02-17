@@ -39,6 +39,7 @@ import com.satyamthakur.bioguardian.ui.model.BottomNavigationItem
 import com.satyamthakur.bioguardian.ui.navigation.BottomEndpoints
 import com.satyamthakur.bioguardian.ui.navigation.Endpoints
 import com.satyamthakur.bioguardian.ui.screens.AnimalDescriptionScreen
+import com.satyamthakur.bioguardian.ui.screens.AnimalIdentifiedScreen
 import com.satyamthakur.bioguardian.ui.screens.BioGuardianAppHomeScreen
 import com.satyamthakur.bioguardian.ui.screens.UploadImageScreen
 import com.satyamthakur.bioguardian.ui.theme.BioGuardianTheme
@@ -58,22 +59,22 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         setContent {
             BioGuardianTheme {
-                // A surface container using the 'background' color from the theme
-                val homeScreenNavController = rememberNavController()
-
-                NavHost(
-                    navController = homeScreenNavController,
-                    startDestination = Endpoints.DASHBOARD
-                ) {
-                    composable(Endpoints.DASHBOARD) {
-                        Dashboard(
-                            homeScreenNavController = homeScreenNavController
-                        )
-                    }
-                    composable(Endpoints.ANIMAL_DESC) {
-                        AnimalDescriptionScreen(navController = homeScreenNavController)
-                    }
-                }
+                AnimalIdentifiedScreen()
+//                val homeScreenNavController = rememberNavController()
+//
+//                NavHost(
+//                    navController = homeScreenNavController,
+//                    startDestination = Endpoints.DASHBOARD
+//                ) {
+//                    composable(Endpoints.DASHBOARD) {
+//                        Dashboard(
+//                            homeScreenNavController = homeScreenNavController
+//                        )
+//                    }
+//                    composable(Endpoints.ANIMAL_DESC) {
+//                        AnimalDescriptionScreen(navController = homeScreenNavController)
+//                    }
+//                }
             }
         }
     }

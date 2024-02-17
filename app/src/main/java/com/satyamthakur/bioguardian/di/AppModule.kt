@@ -1,11 +1,14 @@
 package com.satyamthakur.bioguardian.di
 
 import com.google.firebase.storage.FirebaseStorage
-import com.satyamthakur.bioguardian.BuildConfig
-import com.satyamthakur.bioguardian.data.api.ApiService
-import com.satyamthakur.bioguardian.data.datasource.PostDataSourceImpl
-import com.satyamthakur.bioguardian.data.datasource.PostsDataSource
-import com.satyamthakur.bioguardian.ui.respository.PostRespository
+import com.satyamthakur.bioguardian.data.api.ImagePredictionApiService
+import com.satyamthakur.bioguardian.data.api.NinjaApiService
+import com.satyamthakur.bioguardian.data.datasource.AnimalDataInfo
+import com.satyamthakur.bioguardian.data.datasource.AnimalDataInfoImpl
+import com.satyamthakur.bioguardian.data.datasource.AnimalPredictionData
+import com.satyamthakur.bioguardian.data.datasource.AnimalPredictionDataImpl
+import com.satyamthakur.bioguardian.ui.respository.AnimalRepository
+import com.satyamthakur.bioguardian.ui.respository.PredictionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,30 +21,55 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-    @Singleton
     @Provides
-    fun providesRetrofit(): Retrofit {
-        return Retrofit.Builder().baseUrl("https://jsonplaceholder.typicode.com/")
+    @Singleton
+    fun providesRetrofitForAnimalInfo(): Retrofit {
+        return Retrofit.Builder().baseUrl("https://api.api-ninjas.com/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
+
     @Singleton
     @Provides
-    fun providesApiService(retrofit: Retrofit): ApiService {
-        return retrofit.create(ApiService::class.java)
+    fun providesApiService(retrofit: Retrofit = providesRetrofitForAnimalInfo()): NinjaApiService {
+        return retrofit.create(NinjaApiService::class.java)
     }
 
     @Singleton
     @Provides
-    fun providesNewsDataSource(apiService: ApiService): PostsDataSource {
-        return PostDataSourceImpl(apiService)
+    fun providesApiServiceForAninmalPrediction()
+    : ImagePredictionApiService {
+        val retrofit = Retrofit.Builder().baseUrl("https://detect.roboflow.com/bird-v2/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(ImagePredictionApiService::class.java)
     }
 
     @Singleton
     @Provides
-    fun providesPostRepository(postDataSource: PostsDataSource): PostRespository {
-        return PostRespository(postDataSource)
+    fun providesNewsDataSource(apiService: NinjaApiService): AnimalDataInfo {
+        return AnimalDataInfoImpl(apiService)
+    }
+
+    @Singleton
+    @Provides
+    fun providesAnimalPredictionDataSource(apiService: ImagePredictionApiService): AnimalPredictionData {
+        return AnimalPredictionDataImpl(apiService)
+    }
+
+    @Singleton
+    @Provides
+    fun providesPostRepository(postDataSource: AnimalDataInfo): AnimalRepository {
+        return AnimalRepository(postDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun providesAnimalPredictionRepository(
+        animalPredictionDataSource: AnimalPredictionData
+    ): PredictionRepository {
+        return PredictionRepository(animalPredictionDataSource)
     }
 
 }

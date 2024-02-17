@@ -2,12 +2,12 @@ package com.satyamthakur.bioguardian.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.satyamthakur.bioguardian.data.entity.AnimalInfoResponse
 import com.satyamthakur.bioguardian.data.entity.FakeApiResponse
 import com.satyamthakur.bioguardian.data.entity.ResourceState
-import com.satyamthakur.bioguardian.ui.respository.PostRespository
+import com.satyamthakur.bioguardian.ui.respository.AnimalRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -15,12 +15,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostViewModel @Inject constructor(
-    private val postRespository: PostRespository
+class AnimalViewModel @Inject constructor(
+    private val animalRepository: AnimalRepository
 ) : ViewModel() {
 
-    private val _post : MutableStateFlow<ResourceState<FakeApiResponse>> = MutableStateFlow(ResourceState.Loading())
-    val post: StateFlow<ResourceState<FakeApiResponse>> = _post
+    private val _post : MutableStateFlow<ResourceState<AnimalInfoResponse>> = MutableStateFlow(ResourceState.Loading())
+    val post: StateFlow<ResourceState<AnimalInfoResponse>> = _post
 
     init {
         getPost()
@@ -28,9 +28,9 @@ class PostViewModel @Inject constructor(
 
     private fun getPost() {
         viewModelScope.launch(Dispatchers.IO) {
-            postRespository.getPost()
-                .collectLatest { newsResponse ->
-                    _post.value = newsResponse
+            animalRepository.getPost()
+                .collectLatest { animalResponse ->
+                    _post.value = animalResponse
                 }
         }
     }
