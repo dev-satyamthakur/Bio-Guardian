@@ -86,7 +86,7 @@ fun ExploreMoreCard(title: String, index: Int, modifier: Modifier) {
                 text = title,
                 fontFamily = Montserrat,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 14.sp,
+                fontSize = 16.sp,
                 lineHeight = 22.sp,
                 color = md_theme_light_onTertiaryContainer
             )
